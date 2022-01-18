@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 
 import './App.css';
 
-import SightingsForm from "./SightingsForm";
-import SightingsGrid from "./SightingsGrid";
-import { getSightings } from "./SightingService";
+import SightingsForm from "./components/SightingsForm";
+import SightingsGrid from "./components/SightingsGrid";
+import { getSightings } from "./containers/SightingService";
 
 function App() {
 
