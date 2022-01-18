@@ -22,6 +22,11 @@ const createRouter = function (collection) {
     collection
       .findOne({ _id: ObjectID(id) })
       .then((doc) => {res.json(doc)})
+      .catch((error) => {
+        console.error(error);
+        response.status(500);
+        response.json({status:500, error: error})
+      })
   });
 
   router.post('/', (req, res) => {
@@ -38,9 +43,17 @@ const createRouter = function (collection) {
     })
   })
 
-  // router.delete('/:id', (req, res) => {
-
-  // })
+  router.delete('/:id', (req, res) => {
+    const id = req.params.id;
+    collection
+    .deleteOne({ _id: ObjectID(id) })
+    .then((result) => {res.json(result)})
+    .catch((error) => {
+      console.error(error);
+      response.status(500);
+      response.json({status:500, error: error})
+    })
+  })
 
   return router;
 };
