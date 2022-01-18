@@ -25,3 +25,8 @@ label {
 	flex-wrap: wrap;
 	justify-content: space-evenly;
 }
+
+.sighting-card {
+	display: flex;
+	padding: 1%;
+}

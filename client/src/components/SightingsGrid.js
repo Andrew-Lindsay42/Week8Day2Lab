@@ -1,9 +1,13 @@
 import SightingCard from "./SightingCard";
 
-const SightingsGrid = ({sightings, removeSighting}) => {
+const SightingsGrid = ({sightings, removeSighting, updateSighting}) => {
     const sightingsList = sightings.map((sighting) =>{
-        return <SightingCard sighting={sighting} key={sighting._id} removeSighting={removeSighting} />
-    });
+        return( 
+        <div key={sighting._id}>
+        <SightingCard sighting={sighting} removeSighting={removeSighting} updateSighting={updateSighting} />
+        <hr/>
+        </div>
+        )});
     
     return (
         <>

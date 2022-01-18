@@ -25,16 +25,23 @@ function App() {
   const removeSighting = (id) => {
     const temp = birdSightings.map(s =>s);
     const indexToDel = temp.map(s => s._id).indexOf(id);
-    console.log(indexToDel);
 
     temp.splice(indexToDel, 1);
+    setBirdSightings(temp);
+  }
+
+  const updateSighting = (id, data) => {
+    const temp = birdSightings.map(s =>s);
+    const indexToUpdate = temp.map(s => s._id).indexOf(id);
+    
+    temp.splice(indexToUpdate, 1, data);
     setBirdSightings(temp);
   }
 
   return (
     <>
       <SightingsForm addSighting={addSighting}/>
-      <SightingsGrid sightings={birdSightings} removeSighting={removeSighting} />
+      <SightingsGrid sightings={birdSightings} removeSighting={removeSighting} updateSighting={updateSighting} />
     </>
   );
 }

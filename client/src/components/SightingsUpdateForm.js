@@ -1,7 +1,7 @@
 import {useState} from "react";
-import { updateSighting } from "../containers/SightingService";
+import { putSighting } from "../containers/SightingService";
 
-const SightingsUpdateForm = (id) => {
+const SightingsUpdateForm = ({sighting, setShowForm, updateSighting}) => {
     
     const [formData, setFormData] = useState({})
 
@@ -12,8 +12,10 @@ const SightingsUpdateForm = (id) => {
 
     const onSubmit = (e) =>{
         e.preventDefault();
-        console.log(formData);
-        updateSighting({id}, formData)
+        putSighting(sighting._id, formData)
+        .then((data)=>{
+            updateSighting(data._id, data)})
+        setShowForm(false);
         }
     
 
@@ -22,15 +24,15 @@ const SightingsUpdateForm = (id) => {
             <h2>Update a Sighting</h2>
             <div className="updateFormWrap">
                 <label htmlFor="species">Species:</label>
-                <input onChange={onChange} type="text" id="species"  />
+                <input onChange={onChange} type="text" id="species" placeholder={sighting.species} />
             </div>
             <div className="updateFormWrap">
                 <label htmlFor="location">Location:</label>
-                <input onChange={onChange} type="text" id="location"  />
+                <input onChange={onChange} type="text" id="location" placeholder={sighting.location}/>
             </div>
             <div className="updateFormWrap">
                 <label htmlFor="date">Date:</label>
-                <input onChange={onChange} type="date" id="date"  />
+                <input onChange={onChange} type="date" id="date" placeholder={sighting.date}/>
             </div>
             <input type="submit" value="Save" id="save"/>
 	    </form>

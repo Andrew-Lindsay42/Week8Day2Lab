@@ -14,13 +14,16 @@ export const postSighting = (payload) => {
     .then(res => res.json())
 }
 
-export const updateSighting = (id, payload) => {
+export const putSighting = (id, payload) => {
     return fetch(baseURL + id, {
         method: 'PUT',
         body: JSON.stringify(payload),
         headers: { 'Content-Type': 'application/json' }
     })
-    .then(res => res.json())
+    .then(() => {
+        return fetch(baseURL + id)
+        .then(res => res.json())
+    })
 }
 
 export const deleteSighting = (id) => {

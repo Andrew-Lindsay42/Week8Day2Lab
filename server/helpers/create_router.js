@@ -18,15 +18,18 @@ const createRouter = function (collection) {
       })
   });
 
-  router.get('/:id', (req, res) => {
+  router.get('/:id', (request, response) => {
+    const id = request.params.id;
     collection
-      .findOne({ _id: ObjectID(id) })
-      .then((doc) => {res.json(doc)})
-      .catch((error) => {
-        console.error(error);
-        response.status(500);
-        response.json({status:500, error: error})
-      })
+    .findOne({_id: ObjectID(id)})
+    .then((document) => {
+      response.json(document)
+    })
+    .catch((error) => {
+      console.error(error);
+      response.status(500);
+      response.json({status: 500, error: error})
+    })
   });
 
   router.post('/', (req, res) => {
