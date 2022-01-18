@@ -24,7 +24,25 @@ const createRouter = function (collection) {
       .then((doc) => {res.json(doc)})
   });
 
-    return router;
+  router.post('/', (req, res) => {
+    const newData = req.body
+    collection
+    .insertOne(newData)
+    .then((result) => {
+      res.json(result.ops[0])
+    })
+    .catch((error) => {
+      console.error(error);
+      response.status(500);
+      response.json({status:500, error: error})
+    })
+  })
+
+  // router.delete('/:id', (req, res) => {
+
+  // })
+
+  return router;
 };
 
 module.exports = createRouter;
